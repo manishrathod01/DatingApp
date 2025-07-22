@@ -1,1 +1,43 @@
-<p>member-messages works!</p>
+<div class="flex flex-col w-full h-[72vh]">
+    <div class="flex flex-col flex-grow overflow-auto">
+        @for (message of messages(); track message.id) {
+        <div class="chat" [class.chat-start]="!message.currentUserSender" [class.chat-end]="message.currentUserSender">
+            <div class="chat-image avatar">
+                <div class="w-10 rounded-full">
+                    <img alt="image of user" [src]="message.senderImageUrl" />
+                </div>
+            </div>
+            <div class="chat-header">
+                {{message.senderDisplayName}}
+                <time class="text-xs opacity-50">{{message.messageSent|date:'short'}}</time>
+            </div>
+            <div class="chat-bubble">{{message.content}}</div>
+            @if(message.currentUserSender&&message.dateRead){
+            <div class="chat-footer opacity-50">Seen {{message.dateRead|timeAgo}}</div>
+            }@else if(message.currentUserSender&&!message.dateRead){
+            <div class="chat-footer opacity-50">Not Read</div>
+            }@else{
+            <div class="chat-footer opacity-50">Delivered</div>
+            }
+
+        </div>
+        }
+        <div #messageEndRef></div>
+
+    </div>
+
+    <div class="flex join w-full">
+        <input [(ngModel)]="messageContent" class="input w-full" placeholder="Enter Message"
+            (keydown.enter)="sendMessage()">
+        <button (click)="sendMessage()" class="btn btn-primary join-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+            </svg>
+
+        </button>
+
+    </div>
+
+</div>

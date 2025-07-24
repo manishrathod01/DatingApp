@@ -23,12 +23,16 @@
           "path": "src/core/interceptors"
         },
         "@schematics/angular:resolver": {
-           "skipTests": true,
+          "skipTests": true,
           "path": "src"
         },
         "@schematics/angular:pipe": {
-           "skipTests": true,
+          "skipTests": true,
           "path": "src/core/pipes"
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true,
+          "path": "src/shared/directives"
         }
       },
       "root": "",
